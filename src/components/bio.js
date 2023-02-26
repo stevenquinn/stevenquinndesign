@@ -37,8 +37,7 @@ const Bio = () => {
             <StaticImage
                 className="profile-picture"
                 layout="fixed"
-                formats={["auto", "webp", "avif"]}
-                src="../images/profile-pic.jpeg"
+                src="../images/profile-pic.jpg"
                 width={80}
                 height={80}
                 quality={95}
