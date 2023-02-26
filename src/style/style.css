@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+a {
+    @apply underline text-rose-500 transition-colors duration-200 ease-in-out;
+
+    &:hover {
+        @apply text-rose-700;
+    }
+}
+
+h1 {
+    @apply font-display text-5xl;
+}
+
+h2 {
+    @apply font-display text-3xl text-slate-600 mb-4;
+}
+
+h3 {
+    @apply font-bold text-xl text-rose-500;
+}
+
+p, li {
+    @apply text-slate-600 mb-4 leading-relaxed;
+}
+
+ul {
+    @apply mb-8 mt-4 list-disc ml-12;
+}
+
+li {
+    @apply mb-1;
+}
+
+.gatsby-resp-image-wrapper {
+    @apply mb-8;
+}
+
+.gatsby-resp-image-image {
+    @apply rounded border border-slate-200;
+}
+
+.gatsby-image-wrapper.profile-picture picture img {
+    @apply rounded-full border border-slate-200;
+}
