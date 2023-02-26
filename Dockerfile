@@ -1,4 +1,14 @@
-FROM gatsbyjs/gatsby:onbuild as build
+FROM node:18-alpine AS build
 
-FROM gatsbyjs/gatsby
-COPY --from=build /app/public /pub
+WORKDIR /app
+COPY . .
+
+RUN yarn
+RUN yarn build
+
+FROM nginx:1.18-alpine AS deploy
+
+WORKDIR /usr/share/nginx/html
+RUN rm -rf ./*
+COPY --from=build /app/public .
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
