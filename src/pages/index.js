@@ -1,4 +1,5 @@
 import * as React from "react"
+
 import { Link, graphql } from "gatsby"
 
 import Bio from "../components/bio"
@@ -6,59 +7,89 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 
 const BlogIndex = ({ data, location }) => {
-  const siteTitle = data.site.siteMetadata?.title || `Title`
-  const posts = data.allMarkdownRemark.nodes
+    const siteTitle = data.site.siteMetadata?.title || `Title`
+    const posts = data.allMarkdownRemark.nodes?.filter(post => post?.fields?.slug != '/about/')
 
-  if (posts.length === 0) {
+    if (posts.length === 0) {
+        return (
+            <Layout location={location} title={siteTitle}>
+                <Bio />
+                <p>
+                    No blog posts found. Add markdown posts to "content/blog" (or the
+                    directory you specified for the "gatsby-source-filesystem" plugin in
+                    gatsby-config.js).
+                </p>
+            </Layout>
+        )
+    }
+
     return (
-      <Layout location={location} title={siteTitle}>
-        <Bio />
-        <p>
-          No blog posts found. Add markdown posts to "content/blog" (or the
-          directory you specified for the "gatsby-source-filesystem" plugin in
-          gatsby-config.js).
-        </p>
-      </Layout>
+        <Layout location={location} title={siteTitle}>
+
+            <ol style={{ listStyle: `none` }}>
+                {posts.map(post => {
+                    const title = post.frontmatter.title || post.fields.slug
+                    const featuredImage = post.frontmatter.featured_image?.childImageSharp?.gatsbyImageData || null
+                    const featuredImageTitle = post.frontmatter.featured_image_title || null
+
+                    return (
+                        <li key={post.fields.slug}>
+                            <article
+                                className="pt-8"
+                                itemScope
+                                itemType="http://schema.org/Article"
+                            >
+                                {featuredImage && (
+                                    <div className="mb-8">
+                                        <Link to={post.fields.slug}>
+                                            <img
+                                                srcset={featuredImage.images.fallback.srcSet}
+                                                sizes={featuredImage.images.fallback.sizes}
+                                                src={featuredImage.images.fallback.src}
+                                                alt={featuredImageTitle}
+                                                className="w-full h-auto rounded border border-slate-200 shadow-lg"
+                                            />
+                                        </Link>
+                                    </div>
+                                )}
+                                <div className="md:w-4/5 mx-auto pb-8 border-b border-slate-200">
+                                    <header>
+                                        <small className="text-slate-500 text-sm mb-0 font-bold uppercase">{post.frontmatter.date}</small>
+                                        <h2 className="font-display font-bold text-2xl mb-4">
+                                            <Link to={post.fields.slug} itemProp="url" className="no-underline transition-colors duration-200 ease-in-out hover:text-rose-700">
+                                                <span itemProp="headline">{title}</span>
+                                            </Link>
+                                        </h2>
+                                        { post?.frontmatter?.tags && (
+                                            <div className="flex flex-wrap mb-4 gap-2">
+                                                {post.frontmatter.tags.map(tag => (
+                                                    <span className="bg-slate-200 text-xs inline-block px-3 py-1 rounded-full no-underline text-slate-700">
+                                                        {tag}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </header>
+                                    <section>
+                                        <p
+                                            dangerouslySetInnerHTML={{
+                                                __html: post.frontmatter.description || post.excerpt,
+                                            }}
+                                            itemProp="description"
+                                        />
+
+                                        <Link to={post.fields.slug} className="bg-rose-300 hover:bg-rose-500 transition-all duration-200 hover:shadow-lg mt-4 inline-block px-4 py-1 text-sm rounded-full no-underline text-rose-800 hover:text-white">
+                                            Read more
+                                        </Link>
+                                    </section>
+                                </div>
+                            </article>
+                        </li>
+                    )
+                })}
+            </ol>
+        </Layout>
     )
-  }
-
-  return (
-    <Layout location={location} title={siteTitle}>
-      <Bio />
-      <ol style={{ listStyle: `none` }}>
-        {posts.map(post => {
-          const title = post.frontmatter.title || post.fields.slug
-
-          return (
-            <li key={post.fields.slug}>
-              <article
-                className="post-list-item"
-                itemScope
-                itemType="http://schema.org/Article"
-              >
-                <header>
-                  <h2>
-                    <Link to={post.fields.slug} itemProp="url">
-                      <span itemProp="headline">{title}</span>
-                    </Link>
-                  </h2>
-                  <small>{post.frontmatter.date}</small>
-                </header>
-                <section>
-                  <p
-                    dangerouslySetInnerHTML={{
-                      __html: post.frontmatter.description || post.excerpt,
-                    }}
-                    itemProp="description"
-                  />
-                </section>
-              </article>
-            </li>
-          )
-        })}
-      </ol>
-    </Layout>
-  )
 }
 
 export default BlogIndex
@@ -85,8 +116,20 @@ export const pageQuery = graphql`
         }
         frontmatter {
           date(formatString: "MMMM DD, YYYY")
+          tags
           title
           description
+          featured_image {
+            childImageSharp {
+                gatsbyImageData(
+                    width: 1200
+                    height: 450
+                    placeholder: BLURRED
+                    formats: [AUTO, WEBP, AVIF]
+                )
+            }
+          }
+          featured_image_title
         }
       }
     }

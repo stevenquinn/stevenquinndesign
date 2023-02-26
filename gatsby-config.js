@@ -12,12 +12,12 @@ module.exports = {
     title: `Steven Quinn Design`,
     author: {
       name: `Steven Quinn`,
-      summary: `who lives and works in San Francisco building useful things.`,
+      summary: `I make stuff and write code.`,
     },
     description: `A starter blog demonstrating what Gatsby can do.`,
     siteUrl: `https://gatsbystarterblogsource.gatsbyjs.io/`,
     social: {
-      twitter: `kylemathews`,
+      twitter: `stevenquinn`,
     },
   },
   plugins: [
@@ -30,6 +30,13 @@ module.exports = {
         name: `blog`,
       },
     },
+    {
+        resolve: `gatsby-source-filesystem`,
+        options: {
+          path: `${__dirname}/content/pages`,
+          name: `pages`,
+        },
+      },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -44,7 +51,8 @@ module.exports = {
           {
             resolve: `gatsby-remark-images`,
             options: {
-              maxWidth: 630,
+              linkImagesToOriginal: false,
+              maxWidth: 2000,
             },
           },
           {
@@ -56,6 +64,26 @@ module.exports = {
           `gatsby-remark-prismjs`,
         ],
       },
+    },
+    {
+        resolve: `gatsby-plugin-google-fonts`,
+        options: {
+          fonts: [
+            `Lobster`,
+            `source sans pro\:700`
+          ],
+          display: 'swap'
+        }
+    },
+    {
+        resolve: `gatsby-plugin-google-fonts`,
+        options: {
+          fonts: [
+            `Lato`,
+            `source sans pro\:300,300i,600`
+          ],
+          display: 'swap'
+        }
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
@@ -121,6 +149,18 @@ module.exports = {
         display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
+    },
+    {
+        resolve: `gatsby-transformer-remark`,
+        options: {
+          plugins: [{
+            resolve: "gatsby-remark-external-links",
+            options: {
+              target: "_blank",
+              rel: "noopener noreferrer"
+            }
+          }]
+        }
     },
   ],
 }
