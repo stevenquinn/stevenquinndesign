@@ -49,6 +49,9 @@ module.exports = {
       options: {
         plugins: [
           {
+            resolve: `gatsby-remark-relative-images`,
+          },
+          {
             resolve: `gatsby-remark-images`,
             options: {
               linkImagesToOriginal: false,
@@ -62,6 +65,13 @@ module.exports = {
             },
           },
           `gatsby-remark-prismjs`,
+          {
+            resolve: "gatsby-remark-external-links",
+            options: {
+              target: "_blank",
+              rel: "noopener noreferrer"
+            }
+          }
         ],
       },
     },
@@ -149,18 +159,6 @@ module.exports = {
         display: `minimal-ui`,
         icon: `src/images/sq-icon.png`, // This path is relative to the root of the site.
       },
-    },
-    {
-        resolve: `gatsby-transformer-remark`,
-        options: {
-          plugins: [{
-            resolve: "gatsby-remark-external-links",
-            options: {
-              target: "_blank",
-              rel: "noopener noreferrer"
-            }
-          }]
-        }
-    },
+    }
   ],
 }

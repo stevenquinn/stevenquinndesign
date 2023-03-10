@@ -1,6 +1,6 @@
 ---
 title: Building Apps with React and Laravel | Intro
-date: "2015-05-01T22:12:03.284Z"
+date: "2023-02-24T22:12:03.284Z"
 tags: ["react", "laravel"]
 description: "I love using the PHP Framework Laravel. There’s hardly a day as a web developer that I’m not doing something in Laravel. I also love using the javascript framework React. But for some reason, the Laravel community is hot on VueJS. I’m not sure why, and I’ve got nothing against it (I still use plenty of Vue), but I’ve definitely found the resources for getting new users up to speed on using Laravel with React to be, well, somewhat lacking. Where’s the Laravel React Training?"
 featured_image: "./laravel-react-boilerplate-screenshot-2048x1155.jpg"
