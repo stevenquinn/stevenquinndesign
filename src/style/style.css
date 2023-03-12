@@ -15,7 +15,7 @@ h1 {
 }
 
 h2 {
-    @apply font-display text-3xl text-slate-600 mb-4;
+    @apply font-display text-3xl text-slate-600 mb-4 mt-4;
 }
 
 h3 {
@@ -44,4 +44,9 @@ li {
 
 .gatsby-image-wrapper.profile-picture picture img {
     @apply rounded-full border border-slate-200;
+}
+
+.twitter-tweet {
+  margin-top: 2rem !important;
+  margin-bottom: 2rem !important;
 }
