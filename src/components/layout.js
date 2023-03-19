@@ -5,16 +5,42 @@ import { Link } from "gatsby"
 
 export default function Layout ({ location, title, children }) {
 
+
+    const getInitialTheme = () => {
+        if (typeof window !== 'undefined' && window.localStorage) {
+            const storedPrefs = window.localStorage.getItem('theme')
+            if (typeof storedPrefs === 'string') {
+                return storedPrefs
+            }
+
+            const userMedia = window.matchMedia('(prefers-color-scheme: dark)')
+            if (userMedia.matches) {
+                return 'dark'
+            }
+        }
+
+        return 'light'
+    }
+
+    const [theme, setTheme] = React.useState(getInitialTheme())
+
+
     const setDark = () => {
         document.documentElement.classList.add('dark')
-        localStorage.theme = 'dark'
         setTheme('dark')
+        storeTheme('dark')
     }
 
     const setLight = () => {
         document.documentElement.classList.remove('dark')
-        localStorage.theme = 'light'
         setTheme('light')
+        storeTheme('light')
+    }
+
+    const storeTheme = (theme) => {
+        if (typeof window !== 'undefined' && window.localStorage) {
+            window.localStorage.setItem('theme', theme)
+        }
     }
 
     const applyTheme = (theme) => {
@@ -24,8 +50,6 @@ export default function Layout ({ location, title, children }) {
             setLight()
         }
     }
-
-    const [theme, setTheme] = React.useState(localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light')
 
     React.useEffect(() => {
         applyTheme(theme)
