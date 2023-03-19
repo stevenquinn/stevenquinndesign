@@ -33,7 +33,7 @@ const BlogIndex = ({ data, location }) => {
                     const featuredImageTitle = post.frontmatter.featured_image_title || null
 
                     return (
-                        <li key={post.fields.slug}>
+                        <li key={post.frontmatter.title}>
                             <article
                                 className="pt-8"
                                 itemScope
@@ -43,7 +43,7 @@ const BlogIndex = ({ data, location }) => {
                                     <div className="mb-8">
                                         <Link to={post.fields.slug}>
                                             <img
-                                                srcset={featuredImage.images.fallback.srcSet}
+                                                srcSet={featuredImage.images.fallback.srcSet}
                                                 sizes={featuredImage.images.fallback.sizes}
                                                 src={featuredImage.images.fallback.src}
                                                 alt={featuredImageTitle}
@@ -63,7 +63,7 @@ const BlogIndex = ({ data, location }) => {
                                         { post?.frontmatter?.tags && (
                                             <div className="flex flex-wrap mb-4 gap-2">
                                                 {post.frontmatter.tags.map(tag => (
-                                                    <span className="bg-slate-200 text-xs inline-block px-3 py-1 rounded-full no-underline text-slate-700">
+                                                    <span key={ tag } className="bg-slate-200 text-xs inline-block px-3 py-1 rounded-full no-underline text-slate-700">
                                                         {tag}
                                                     </span>
                                                 ))}
@@ -88,6 +88,10 @@ const BlogIndex = ({ data, location }) => {
                     )
                 })}
             </ol>
+
+            <footer>
+                <Bio />
+            </footer>
         </Layout>
     )
 }
