@@ -5,7 +5,7 @@ export default function FeaturedImage({ image, title }) {
     return (
         <div className="mb-8">
             <img
-                srcset={ image.images.fallback.srcSet }
+                srcSet={ image.images.fallback.srcSet }
                 sizes={ image.images.fallback.sizes }
                 src={ image.images.fallback.src }
                 alt={ title }

@@ -15,7 +15,7 @@ h1 {
 }
 
 h2 {
-    @apply font-display text-3xl text-slate-600 mb-4 mt-4;
+    @apply font-display text-3xl text-slate-600 dark:text-zinc-500 mb-4 mt-4;
 }
 
 h3 {
@@ -23,7 +23,7 @@ h3 {
 }
 
 p, li {
-    @apply text-slate-600 mb-4 leading-relaxed;
+    @apply text-slate-600 mb-8 leading-relaxed text-lg dark:text-zinc-300;
 }
 
 ul {
@@ -39,11 +39,11 @@ li {
 }
 
 .gatsby-resp-image-image {
-    @apply rounded border border-slate-200;
+    @apply rounded border border-slate-200 dark:border-zinc-700;
 }
 
 .gatsby-image-wrapper.profile-picture picture img {
-    @apply rounded-full border border-slate-200;
+    @apply rounded-full border border-slate-200 dark:border-zinc-700;
 }
 
 .twitter-tweet {

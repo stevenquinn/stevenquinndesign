@@ -10,6 +10,7 @@
   "dependencies": {
     "@fontsource/merriweather": "^4.5.14",
     "@fontsource/montserrat": "^4.5.14",
+    "classnames": "^2.3.2",
     "gatsby": "^5.6.1",
     "gatsby-plugin-feed": "^5.6.0",
     "gatsby-plugin-google-fonts": "^1.0.1",
@@ -20,7 +21,7 @@
     "gatsby-remark-external-links": "^0.0.4",
     "gatsby-remark-images": "^7.6.0",
     "gatsby-remark-prismjs": "^7.6.0",
-    "gatsby-remark-relative-images": "^2.0.2",
+    "gatsby-remark-relative-images": "^0.3.0",
     "gatsby-remark-responsive-iframe": "^6.6.0",
     "gatsby-source-filesystem": "^5.6.0",
     "gatsby-transformer-remark": "^6.6.0",
